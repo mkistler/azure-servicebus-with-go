@@ -7,18 +7,30 @@ import (
 	"log"
 	"os"
 
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/Azure/azure-sdk-for-go/sdk/messaging/azservicebus"
 	"github.com/Azure/azure-sdk-for-go/sdk/messaging/azservicebus/admin"
 )
 
 var (
-	connStr = os.Getenv("CONNECTION_STRING")
-	client  *azservicebus.Client
+	connStr    = os.Getenv("CONNECTION_STRING")
+	serviceURL = os.Getenv("SERVICE_BUS_URL")
+	client     *azservicebus.Client
 )
 
 func init() {
 	var err error
-	client, err = azservicebus.NewClientFromConnectionString(connStr, nil)
+
+	// For more information about the DefaultAzureCredential:
+	// https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/azidentity#NewDefaultAzureCredential
+	cred, err := azidentity.NewDefaultAzureCredential(nil)
+
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
+
+	client, err = azservicebus.NewClient(serviceURL, cred, nil)
+
 	if err != nil {
 		log.Fatalf("%v", err)
 	}

@@ -2,7 +2,10 @@ module servicebus-go-demo
 
 go 1.17
 
-require github.com/Azure/azure-sdk-for-go/sdk/messaging/azservicebus v0.3.1
+require (
+	github.com/Azure/azure-sdk-for-go/sdk/azidentity v0.12.0
+	github.com/Azure/azure-sdk-for-go/sdk/messaging/azservicebus v0.3.1
+)
 
 require (
 	github.com/Azure/azure-amqp-common-go/v3 v3.2.1 // indirect
@@ -19,6 +22,7 @@ require (
 	github.com/form3tech-oss/jwt-go v3.2.2+incompatible // indirect
 	github.com/jpillora/backoff v1.0.0 // indirect
 	github.com/klauspost/compress v1.10.3 // indirect
+	github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 // indirect
 	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897 // indirect
 	golang.org/x/net v0.0.0-20210929193557-e81a3d93ecf6 // indirect
 	golang.org/x/text v0.3.7 // indirect
